@@ -1,4 +1,5 @@
 import React from 'react';
+import "./index.css";
 
 
 
@@ -47,25 +48,68 @@ import React from 'react';
     },
   ];
 
+  
   const App = () => {
   return (
-    <div>
-      <h1>Hello world</h1>
+    <>
+    <div className='container'>
+      <Header/>
+      <Menu/>
+      <Footer/>
+      </div>
       
-      <p>This is my pizza</p>
-      <Pizza/>
-      
-    </div>
-  )
+    </>
+  );
 }
 function Pizza(){
   return(
     <div>
-      <h1>Hello pizza</h1>
+      <img src="pizzas/spinaci.jpg" alt='spinaci.jpg'/>
+      <h3>Pizza spinaci</h3>
+      <p>Tomato, mozarella, spinach, and ricotta chees</p>
 
     </div>
   );
 
+}
+
+function Header(){
+  const style = {}
+  return (
+    <div className='header footer'>
+  <h1 style={{style}}>Fast React Pizza Com.</h1>
+  </div>
+  );
+
+
+}
+function Menu(){
+  return(
+    <main className="menu">
+    <h2>Our Menu</h2>
+    <Pizza/>
+    <Pizza/>
+    <Pizza/>
+
+  </main>
+  
+  );
+}
+function Footer(){
+  const hour = new Date().getHours();
+  const openhour = 10;
+  const closehour = 22;
+
+ 
+  return(
+    <>
+    <footer>{new Date().toLocaleTimeString()}. We're currently open</footer>
+    
+    </>
+
+
+
+  );
 }
 
 export default App
