@@ -48,6 +48,24 @@ import "./index.css";
     },
   ];
 
+  /*<Pizza
+  name=" pizza spainaci"
+  ingredients="Tomato, mozarella, spinach, and ricotta chees"
+  photoName="pizzas/spinaci.jpg"
+  price="10"
+  
+  
+  />
+
+  <Pizza
+  name="pizza funghi"
+  ingredients="Tomato , Mashroom"
+  price='10'
+  photoName="pizzas/funghi.jpg"
+  />
+  */
+  
+
   
   const App = () => {
   return (
@@ -61,17 +79,7 @@ import "./index.css";
     </>
   );
 }
-function Pizza(){
-  return(
-    <div>
-      <img src="pizzas/spinaci.jpg" alt='spinaci.jpg'/>
-      <h3>Pizza spinaci</h3>
-      <p>Tomato, mozarella, spinach, and ricotta chees</p>
 
-    </div>
-  );
-
-}
 
 function Header(){
   const style = {}
@@ -84,32 +92,83 @@ function Header(){
 
 }
 function Menu(){
+ const pizzas = pizzaData;
   return(
     <main className="menu">
     <h2>Our Menu</h2>
-    <Pizza/>
-    <Pizza/>
-    <Pizza/>
+    <p>
+      Authentic italian cuisine. 6 creative Dishes to choose from. All from
+       our stone oven all organic, all Delicious
+    </p>
+    <ul className='pizzas'>
+      {pizzas.map((pizza)=>(
+        <Pizza pizzaobj = {pizza} key ={pizza.name}
+
+      />
+      ))}
+        
+    </ul>
+    
+   
+    
 
   </main>
   
   );
 }
+
+function Pizza({pizzaobj}){
+
+  if(pizzaobj.soldOut) return null;
+
+  return(
+    <li className='pizza'>
+      <img src={pizzaobj.photoName} alt='spinaci.jpg'/>
+      <div>
+      <h3>{pizzaobj.name}</h3>
+      <p>{pizzaobj.ingredients}</p>
+      <span>{pizzaobj.price }</span>
+
+    </div>
+    </li>
+  );
+
+}
+
 function Footer(){
   const hour = new Date().getHours();
-  const openhour = 10;
+  const openhour = 12;
   const closehour = 22;
+  const isopen = hour>=openhour && hour<=closehour
+  console.log(isopen)
 
  
-  return(
-    <>
-    <footer>{new Date().toLocaleTimeString()}. We're currently open</footer>
-    
-    </>
+  return(  
+    <footer className='footer'>
+      {isopen ? (
+        <Order closehour={closehour} openhour={openhour}/>
+      ):(
+        <p>We are happy to welcome you between {openhour}.00 and {closehour}.00
+        </p>
+      )}
+    </footer>
+      
+    );
+      }
+
+  function Order({openhour , closehour}){
+    return (
+    <div className='order'>
+        <p>
+          We are open from {openhour}.00 to {closehour}.00 . Come visit Gaurav Restaurant
+          or order online
+        </p>
+        <button className='btn'>Order</button>
+      </div>
+    );
+  }
 
 
 
-  );
-}
 
 export default App
