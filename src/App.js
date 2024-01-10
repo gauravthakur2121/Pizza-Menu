@@ -119,7 +119,7 @@ function Menu(){
 
 function Pizza({pizzaobj}){
 
-  if(pizzaobj.soldOut) return null;
+ // if(pizzaobj.soldOut) return null;
 
   return(
     <li className='pizza'>
@@ -127,7 +127,7 @@ function Pizza({pizzaobj}){
       <div>
       <h3>{pizzaobj.name}</h3>
       <p>{pizzaobj.ingredients}</p>
-      <span>{pizzaobj.price }</span>
+      <span>{pizzaobj.soldOut ? "Sold Out" :pizzaobj.price }</span>
 
     </div>
     </li>
